@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<#include init />
+
+<html class="${ root_css_class }" dir="<@liferay.language key="lang.dir" />" lang="${ w3c_language_id }">
+
+	<head>
+
+		<!-- Google Tag Manager -->
+		<script>
+			(function(w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({
+					'gtm.start': new Date().getTime(),
+					event: 'gtm.js'
+				});
+				var f = d.getElementsByTagName(s)[0],
+						j = d.createElement(s),
+						dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src =
+						'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', '${ google_analytics_measurement_id }');
+		</script>
+		<!--End Google Tag Manager -->
+
+		<!-- Co browser 8x8 Widget -->
+		<script> window.CoBrowsingCustomStrings =
+					{"popup-start-information": "For help with this service, contact the Charity Commission on 03000 66 9197 and quote the six digit number below.","popup-replica-disconnected-information": "Please provide the session ID to your advisor. Click on Stop to end at any time."};
+		</script>
+		<script>
+			(function(e,i,g,h,t,c,o,b,r,w){r=i.createElement(g);r.setAttribute(h,c);
+				o&&Object.keys(o).map(function(k){r.setAttribute(k,o[k])});
+				r.async=1;r.src='https://'+t+'/license'+c+'/dist/primary-bundle.js';
+				w=i.getElementsByTagName(g)[0];w.parentNode.insertBefore(r,w);
+			})(window,document,'script','data-8x8-co-browsing','cb.8x8.com','60f0103b9f3a67004ea062ee',{
+				'data-8x8-co-browsing-multi-domain': true,
+				'data-8x8-co-browsing-mode':'no-control'
+			});
+		</script>
+		<!-- Co browser 8x8 Widget -->
+
+		<#if Request.LIFERAY_SHARED_charityName?has_content && Request.LIFERAY_SHARED_charityNumber?has_content>
+			<title>${ Request.LIFERAY_SHARED_charityName } - ${ Request.LIFERAY_SHARED_charityNumber }</title>
+			<#assign og_title = Request.LIFERAY_SHARED_charityName + " - Charity " + Request.LIFERAY_SHARED_charityNumber />
+			<#assign current_url = theme_display.getPortalURL() + theme_display.getURLCurrent() />
+			<meta property="og:title" content="${ og_title }"/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:url" content="${ current_url }" />
+			<meta property="og:image"content="https://register-of-charities.charitycommission.gov.uk/o/ccew-registertheme/images/favicon.ico"/>
+			<meta property="og:description" content="Charity details for ${ og_title }"/>
+		<#else>
+			<title>${ layout.getHTMLTitle(locale) }</title>
+		</#if>
+
+
+		<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+
+		<@liferay_util["include"] page=top_head_include />
+
+	</head>
+
+	<body class="${ body_css_class }">
+
+		<!-- Google Tag Manager (noscript) -->
+		<noscript>
+			<iframe src="https://www.googletagmanager.com/ns.html?id=${ google_analytics_measurement_id }" height="0" width="0" style="display:none;visibility:hidden">
+			</iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<@liferay_ui["quick-access"] contentId="#main-content" />
+
+		<@liferay.control_menu />
+
+		<div id="wrapper" class="govuk-body">
+			<div class="cookie-consent-banner-wrapper">
+				<div id="cookie-consent-banner" class="govuk-width-container"></div>
+			</div>
+			<#include "${full_templates_path}/header.ftl" />
+
+			<@liferay_util["include"] page=body_top_include />
+
+			<section id="content" class="govuk-width-container">
+				<@liferay_util["include"] page=content_include />
+			</section>
+
+			<#include "${full_templates_path}/footer.ftl" />
+
+		</div>
+
+		<@liferay_util["include"] page=body_bottom_include />
+		<@liferay_util["include"] page=bottom_include />
+
+	</body>
+</html>
+

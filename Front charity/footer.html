@@ -1,0 +1,31 @@
+<#if themeDisplay.isSignedIn()>
+	<div class="govuk-width-container" id="tellUsWhatYouThink">
+		<@liferay_portlet["runtime"]
+			portletName="uk_gov_ccew_portal_user_feedback_UserFeedbackPortlet"
+		/>
+	</div>
+</#if>
+	
+<footer class="footer-top govuk-footer " role="contentinfo">
+	<div class="govuk-width-container">
+		<div class="govuk-footer__meta">
+			<#attempt>
+				<@liferay_journal["journal-article"]
+					articleId="THEME-FOOTER"
+					groupId=group_id
+				/>
+			<#recover>
+			</#attempt>
+			<div class="govuk-footer__meta-item">
+				<a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/" id="crown-copyright-link">
+					© Crown copyright
+				</a>
+			</div>
+			<div class="co-browser">
+				<a href="#" onclick="window.coBrowsingInstance && coBrowsingInstance.showPopup() ;return false;">
+					<img src="${themeDisplay.getPathThemeRoot()}/images/custom/co-browser-popup-main.png"/>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
